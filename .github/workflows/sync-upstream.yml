@@ -26,6 +26,6 @@ jobs:
       - name: Fetch & Merge Upstream
         run: |
           git fetch upstream
-          git checkout main  # 替换为你的分支（如 master）
+          git checkout master  # 替换为你的分支（如 master）
           git merge upstream/main
           git push origin main
