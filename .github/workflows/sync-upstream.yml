@@ -1,0 +1,31 @@
+name: Sync Upstream
+
+on:
+  schedule:
+    # 每天 UTC 时间 0 点运行（北京时间 8 点）
+    - cron: '0 0 * * *'
+  # 也可以手动触发
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      # 检出你的 Fork 仓库
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 添加上游仓库（原仓库）
+      - name: Add Upstream
+        run: |
+          git remote add upstream https://github.com/beck-8/subs-check.git
+
+      # 拉取上游仓库的更新并合并
+      - name: Fetch & Merge Upstream
+        run: |
+          git fetch upstream
+          git checkout main  # 替换为你的分支（如 master）
+          git merge upstream/main
+          git push origin main
