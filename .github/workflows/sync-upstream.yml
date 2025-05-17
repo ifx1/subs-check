@@ -27,5 +27,5 @@ jobs:
         run: |
           git fetch upstream
           git checkout master  # 替换为你的分支（如 master）
-          git merge upstream/main
-          git push origin main
+          git merge upstream/master
+          git push origin master
